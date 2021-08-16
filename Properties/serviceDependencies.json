@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:tttServerContext"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:tttServerContextGame"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:tttServerGameContext"
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:GameBoardContext"
+    }
+  }
+}
