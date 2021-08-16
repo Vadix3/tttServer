@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using tttGame.Models;
 using tttServer.Data;
+using tttServer.Models;
 
 namespace tttServer.Api
 {
@@ -16,7 +18,7 @@ namespace tttServer.Api
     public class GameBoardsController : ControllerBase
     {
         private readonly GameBoardContext _context;
-
+        public const int SIZE = 5;
         public GameBoardsController(GameBoardContext context)
         {
             _context = context;
@@ -29,27 +31,52 @@ namespace tttServer.Api
             return await _context.GameBoard.ToListAsync();
         }
 
-        // GET: api/GameBoards/test
-        [HttpGet("test")]
-        public string Make_Move(string jsonMatrix)
+        // POST: api/GameBoards/test
+        [HttpPost("test")]
+        public string Make_Move([FromBody] string content)
         {
+            Console.WriteLine("Got: " + content);
+
             //convert json to object
+            char[,] board = JsonConvert.DeserializeObject<char[,]>(content);
+
             //find an empty square
+            int[] position = Get_dumb_position(board);
+
             //mark the square
+            board[position[0], position[1]] = 'O';
+
             //convert to json
+            var json = JsonConvert.SerializeObject(board);
+
             //return the json
+            return json;
+        }
 
+        /** A method that receives a matrix and returns a random empty position*/
+        private int[] Get_dumb_position(char[,] demoAfter)
+        {
+            int[] pos = { 0, 0 };
 
-
-            int[,] temp = new int[5, 5];
-            for (int i = 0; i < 5; i++)
+            // array with empty spots
+            ArrayList emptySpots = new ArrayList();
+            for (int i = 0; i < SIZE; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < SIZE; j++)
                 {
-                    temp[i, j] = (i + j) % 3;
+                    if (demoAfter[i, j] == ' ')
+                    { // if empty position is found
+                        emptySpots.Add(new Position(i, j));
+                    }
                 }
             }
-            return JsonConvert.SerializeObject(temp);
+
+            Position position = (Position)emptySpots[new Random().Next(emptySpots.Count)];
+
+            pos[0] = position.i;
+            pos[1] = position.j;
+
+            return pos;
         }
 
         // GET: api/GameBoards/5
