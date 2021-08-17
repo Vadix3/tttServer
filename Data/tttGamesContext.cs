@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using tttGame.Models;
+using tttServer.Models;
 
 namespace tttServer.Data
 {
-    public class GameBoardContext : DbContext
+    public class tttGamesContext : DbContext
     {
-        public GameBoardContext(DbContextOptions<GameBoardContext> options)
+        public tttGamesContext (DbContextOptions<tttGamesContext> options)
             : base(options)
         {
         }
 
-        public DbSet<tttGame.Models.GameBoard> GameBoard { get; set; }
+        public DbSet<tttServer.Models.TblGames> TblGames { get; set; }
     }
 }

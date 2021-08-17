@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tttServer", "tttServer.csproj", "{C2224696-37CB-4E56-9212-5F7203918F5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tttServer", "tttServer.csproj", "{C2224696-37CB-4E56-9212-5F7203918F5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

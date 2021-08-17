@@ -19,7 +19,10 @@ namespace tttServer.Pages
 
         public void OnGet()
         {
+            // I come here when the page is opened
 
         }
+
+
     }
 }

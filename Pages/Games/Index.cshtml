@@ -1,0 +1,58 @@
+﻿@page
+@model tttServer.Pages.Games.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+
+    <h1>Games List</h1>
+
+    <p>
+        <!-- <a asp-page="Create">Create New</a> -->
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TblGames[0].Participant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TblGames[0].Num_of_turns)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TblGames[0].Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TblGames[0].User_win)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TblGames)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Num_of_turns)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User_win)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

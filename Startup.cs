@@ -31,6 +31,12 @@ namespace tttServer
             services.AddDbContext<GameBoardContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameBoardContext")));
 
+            services.AddDbContext<tttPlayersContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("tttPlayersContext")));
+
+            services.AddDbContext<tttGamesContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("tttGamesContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
