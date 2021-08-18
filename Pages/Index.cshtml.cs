@@ -19,6 +19,7 @@ namespace tttServer.Pages
 
         public void OnGet()
         {
+            Console.WriteLine("Start program");
             // I come here when the page is opened
 
         }

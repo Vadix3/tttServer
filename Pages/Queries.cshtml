@@ -1,5 +1,5 @@
 ﻿@page
-@model tttServer.Models.TblPlayers
+@model tttServer.Pages.QueriesModel
 @{
 }
 <div class="text-center">
@@ -11,14 +11,144 @@
     <br />
     <br />
 
-    <a href="/Players">Show all players</a>
+    <p>
+        <a href="/Players">Show all players</a>
+    </p>
     <br />
-    <a href="/Games">Show all games</a>
+
+    <p>
+        <a href="/Games">Show all games</a>
+    </p>
     <br />
-    <a href="">Combo box</a>
-    <br />
-    <a href="">Show players and how many games they played</a>
-    <br />
-    <a href="">Show table with players by games played DESC</a>
+
+    <p style="border-color">Select user to see his games:</p>
+
+
+    <form method="post" asp-page-handler="MyMethod">
+        <select class="form-control"
+                asp-for="Username"
+                asp-items="Model.Usernames"
+                onchange="this.form.submit();">
+        </select>
+    </form>
+
+    <p>
+
+        <!-- A table that shows the games for the selected player -->
+        <table class="table" id="GamesForPlayer">
+
+            <thead>
+                <tr>
+                    <th>
+                        Number of turns
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Player won?
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Players_games)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(i => item.Num_of_turns)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.User_win)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </p>
+    <br /><br />
+
+    <p>
+        <a>Players and how many games they played</a>
+        <br />
+
+        <!-- A table that shows the players and how many games they played -->
+        <table class="table" id="PlayersAndGames">
+
+            <thead>
+                <tr>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Number of games
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.All_players)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(i => item.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Num_of_games)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
+
+    <p>
+        <a>Player details by games played DESC</a>
+
+        <!-- A table that shows the players details ordered by games played desc -->
+        <table class="table" id="PlayersAndGames">
+
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Number of games
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Players_by_game_desc)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(i => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Last_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Num_of_games)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
+    </p>
 
 </div>
