@@ -1,0 +1,56 @@
+﻿@page
+@model tttServer.Pages.PlayersByGamesModel
+
+@{
+    ViewData["Title"] = "PlayersByGamesDesc";
+}
+
+<h1>Player details ordered by number of games descending</h1>
+
+<p>
+
+    <!-- A table that shows the players details ordered by games played desc -->
+    <table class="table" id="PlayersAndGames">
+
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Username
+                </th>
+                <th>
+                    Number of games
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Players_by_game_desc)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(i => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Last_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Num_of_games)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</p>
+    </p>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

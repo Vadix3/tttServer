@@ -1,0 +1,46 @@
+﻿@page 
+@model tttServer.Pages.GamesForPlayerModel
+
+@{
+    ViewData["Title"] = "GamesForPlayer";
+}
+
+<h1>Games of selected player</h1>
+
+<!-- A table that shows the games for the selected player -->
+<table class="table" id="GamesForPlayer">
+
+    <thead>
+        <tr>
+            <th>
+                Number of turns
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Player won?
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+        <tbody>
+            @foreach (var item in Model.Players_games)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(i => item.Num_of_turns)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.User_win)
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

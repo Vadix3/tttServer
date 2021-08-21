@@ -67,9 +67,9 @@ namespace tttServer.Api
 
         // POST: api/TblPlayers/login
         [HttpPost("login")]
-        public async Task<ActionResult<TblPlayers>> LoginUser(Credentials creds)
+        public async Task<ActionResult<TblPlayers>> LoginUser([FromBody] Credentials creds)
         {
-
+            Console.WriteLine("Login credentials: "+creds.Username+" , "+creds.Password);
             var user = await _context.TblPlayers.FirstOrDefaultAsync(s => s.Username == creds.Username && s.Password == creds.Password);
             if (user == null) // check if we found something
             {

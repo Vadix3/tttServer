@@ -42,6 +42,7 @@ namespace tttServer.Pages.Players
 
                 return NotFound();
             }
+            
             return Page();
         }
 
@@ -49,10 +50,33 @@ namespace tttServer.Pages.Players
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
+
+            // Problem is here, modelstate is never valid
+            TblPlayers.ConfirmPassword = TblPlayers.Password;
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Id);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Name);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Last_name);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Username);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Password);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.Num_of_games);
+            Console.WriteLine("TblPlayers got = " + TblPlayers.ConfirmPassword);
+
             if (!ModelState.IsValid)
             {
                 Console.WriteLine("!ModelState.IsValid");
-                //Problem here for some reason
+
+
+                var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, x.Value.Errors })
+                .ToArray();
+
+                foreach (var error in errors) {
+                    Console.WriteLine("Erorr: "+error.Errors.ToString());
+                }
+
+
                 return Page();
             }
 

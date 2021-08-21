@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +29,6 @@ namespace tttServer.Models
         [StringLength(30, MinimumLength = 6, ErrorMessage = "Password is too short!")]
         public string Password { get; set; } // password
 
-        [Required]
         [Compare("Password", ErrorMessage = "Passwords does not match")]
         public string ConfirmPassword { get; set; } // password confirmation
     }

@@ -34,9 +34,14 @@
                 <span asp-validation-for="TblPlayers.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblPlayers.Num_of_games" class="control-label"></label>
-                <input asp-for="TblPlayers.Num_of_games" class="form-control" />
-                <span asp-validation-for="TblPlayers.Num_of_games" class="text-danger"></span>
+                <label asp-for="TblPlayers.ConfirmPassword" class="control-label"></label>
+                <input asp-for="TblPlayers.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="TblPlayers.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label hidden asp-for="TblPlayers.Num_of_games" class="control-label" ></label>
+                <input asp-for="TblPlayers.Num_of_games" class="form-control" type="hidden"/>
+                <span asp-validation-for="TblPlayers.Num_of_games" class="text-danger" ></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

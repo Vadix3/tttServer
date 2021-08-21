@@ -27,8 +27,6 @@ namespace tttServer.Pages
         [BindProperty(SupportsGet = true)]
         public string Username { get; set; }
 
-        // Descending players
-        public IList<TblPlayers> Players_by_game_desc { get; set; }
 
         // Games that the selected player played
         public IList<TblGames> Players_games { get; set; }
@@ -42,7 +40,7 @@ namespace tttServer.Pages
         }
 
 
-        public async void OnPostMyMethod()
+        public async Task<IActionResult> OnPostMyMethod()
         {
             Console.WriteLine("Listener: " + Username);
 
@@ -51,32 +49,16 @@ namespace tttServer.Pages
             if (user == null) // check if we found something
             {
                 Console.WriteLine("Not found");
-            }
-
-            // Games for player
-            var games = from m in _gamesContext.TblGames
-                        select m;
-
- 
-            if (!string.IsNullOrEmpty(user.Id.ToString()))
-            {
-
-                games = games.Where(s => s.Participant.Equals(user.Id));
-            }
-
-
-            if (games == null)
-            {
-                Console.WriteLine("No games!");
+                return RedirectToPage("Queries");
             }
             else
             {
-                Console.WriteLine("Games 1");
-                Players_games = games.ToList();
-                Console.WriteLine("Games 2");
-
+                Console.WriteLine("Sending user id = " + user.Id);
+                return RedirectToPage("GamesForPlayer", "UserId", new { id = user.Id });
             }
         }
+
+
 
 
         public void OnPost()
@@ -96,37 +78,6 @@ namespace tttServer.Pages
             var query = from m in _playersContext.TblPlayers
                         select m.Username;
             Usernames = new SelectList(await query.ToListAsync());
-
-            // Players by game desc
-            Players_by_game_desc = All_players.OrderByDescending(p => p.Num_of_games).ToList();
-
-            // Games by player test
-            var user = await _playersContext.TblPlayers.FirstOrDefaultAsync(s => s.Username == "YinoNews");
-
-            if (user == null) // check if we found something
-            {
-                Console.WriteLine("Not found");
-            }
-
-            // Games for player
-            var games = from m in _gamesContext.TblGames
-                        select m;
-
-            if (!string.IsNullOrEmpty(user.Id.ToString()))
-            {
-                games = games.Where(s => s.Participant.Equals(user.Id));
-            }
-
-            if (games == null)
-            {
-                Console.WriteLine("No games!");
-            }
-            else
-            {
-                Console.WriteLine("Got players games = " + games.Count());
-                Players_games = games.ToList();
-            }
-
 
         }
 
