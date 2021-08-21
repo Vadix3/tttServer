@@ -81,6 +81,27 @@ namespace tttServer.Api
             return user;
         }
 
+
+        // GET: api/TblPlayers/addgame/{id}
+        /** A method that will incerement the number of games for the selected Id*/
+        [HttpGet("addgame/{id}")]
+        public async Task<ActionResult<TblPlayers>> IncrementNumberOfgames(int id)
+        {
+            Console.WriteLine("Adding game to user: "+id);
+            var user = await _context.TblPlayers.FirstOrDefaultAsync(s => s.Id == id);
+            if (user == null) // check if we found something
+            {
+                return NotFound();
+            }
+
+            user.Num_of_games = user.Num_of_games + 1;
+
+            _context.SaveChanges();
+            Console.WriteLine("Found: " + user);
+
+            return user;
+        }
+
         // PUT: api/TblPlayers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

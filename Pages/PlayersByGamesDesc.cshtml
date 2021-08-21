@@ -32,24 +32,27 @@
         <tbody>
             @foreach (var item in Model.Players_by_game_desc)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(i => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(i => item.Last_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(i => item.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(i => item.Num_of_games)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(i => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Last_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => item.Num_of_games)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </p>
+<div>
+    <a asp-page="Index">Back</a>
+</div>
     </p>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -39,7 +39,7 @@ namespace tttServer.Pages.Players
             _context.TblPlayers.Add(TblPlayers);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/RegistrationSuccess");
         }
     }
 }
